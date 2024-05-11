@@ -51,7 +51,7 @@ async def app():
         if other_language:
             language_type = other_language
     
-    tempo_type = st.text_input("How fast would you like the song/s?", ['slow', 'moderate', 'fast'])
+    tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast'])
     activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
     music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
     
