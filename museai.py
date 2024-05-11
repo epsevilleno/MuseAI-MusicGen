@@ -62,9 +62,8 @@ async def app():
     if st.button("Generate Song List"):
         if question and context:
             response = await generate_response(question, context)
-            songs = response
             st.write("Songs Generated:")
-            st.write(songs)
+            st.write(response)
         else:
             st.error("Ensure all fields are filled out.")
 
