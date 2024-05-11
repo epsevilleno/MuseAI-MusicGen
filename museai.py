@@ -39,13 +39,13 @@ async def app():
     #User inputs to process
     feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")
     
-    genre_type = st.text_input("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
+    genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
     if genre_type == 'Other':
         other_genre = st.text_input("Please specify what genre you would like.")
         if other_genre:
             genre_type = other_genre
     
-    language_type = st.text_input("What language do you prefer?", ['English', 'Filipino', 'Korean', 'Other'])
+    language_type = st.selectbox("What language do you prefer?", ['English', 'Filipino', 'Korean', 'Other'])
     if language_type == 'Other':
         other_language = st.text_input("Please specify what language you would like.")
         if other_language:
