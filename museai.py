@@ -20,13 +20,13 @@ async def generate_response(question, context):
 
 async def museai_response(input_text):
     model = "gpt-3.5-turbo"
-    response = await client.chat.completions.create(
+    response = await client.ChatCompletions.acreate(
         model=model,
         messages=[{"role": "user", "content": "Please give supportive encouragement based on {input_text} and say to them to proceed"},
                   {"role": "system", "content": "You are a supportive system"}],
         max_tokens = 50
     )
-    return completion.choices[0].message.content
+    return response.choices[0].message['content']
 
 async def app():
     st.text("Created By: \n"
@@ -50,7 +50,7 @@ async def app():
     
     if feeling_type:
         
-        museai = museai_response(feeling_type)
+        museai = asyncio.run(museai_response(feeling_type))
         st.write(museai)
                      
         genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
