@@ -47,11 +47,11 @@ async def app():
     #User inputs to process
     feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")   
     
-    museai = museai_response(feeling_type)
-    st.write(museai)
-    
     if feeling_type:
-             
+        
+        museai = museai_response(feeling_type)
+        st.write(museai)
+                     
         genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
         if genre_type == 'Other':
             other_genre = st.text_input("Please specify what genre you would like.")
