@@ -28,6 +28,9 @@ async def museai_response(input_text):
     )
     return response.choices[0].message['content']
 
+def run_async (coro):
+    return asyncio.run(coro)
+
 async def app():
     st.text("Created By: \n"
             "EJ Prince D. Sevilleno \n"
@@ -49,8 +52,9 @@ async def app():
     feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")   
     
     if feeling_type:
-        
-        museai = museai_response(feeling_type)
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        museai = loop.run_until_complete(museai_response(feeling_type))
         st.write(museai)
                      
         genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
