@@ -18,16 +18,6 @@ async def generate_response(question, context):
     )
     return completion.choices[0].message.content
 
-async def museai_response(input_text):
-    model = "gpt-3.5-turbo"
-    response = await client.ChatCompletions.acreate(
-        model=model,
-        messages=[{"role": "user", "content": "Please give supportive encouragement based on {input_text} and say to them to proceed"},
-                  {"role": "system", "content": "You are a supportive system"}],
-        max_tokens = 50
-    )
-    return response.choices[0].message['content']
-
 def run_async (coro):
     return asyncio.run(coro)
 
@@ -52,10 +42,6 @@ async def app():
     feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")   
     
     if feeling_type:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        museai = loop.run_until_complete(museai_response(feeling_type))
-        st.write(museai)
                      
         genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
         if genre_type == 'Other':
@@ -69,9 +55,9 @@ async def app():
             if other_language:
                 language_type = other_language
         
-        tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast', 'any'])
-        activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
-        music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
+            tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast', 'any'])
+            activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
+            music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
         
         context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
         question = "What music should I play?"
