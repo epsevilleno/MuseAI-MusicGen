@@ -18,14 +18,15 @@ async def generate_response(question, context):
     )
     return completion.choices[0].message.content
 
-async def museai_response (input):
+async def museai_response(input_text):
     model = "gpt-3.5-turbo"
-    response = openai.Completion.create(
+    response = await client.chat.completions.create(
         model=model,
-        prompt=f"Please give a supportive respond based on {input}",
+        messages=[{"role": "user", "content": "Please give supportive encouragement based on {input_text} and say to them to proceed"},
+                  {"role": "system", "content": "You are a supportive system"}],
         max_tokens = 50
     )
-    return response.choices[0].message.content
+    return completion.choices[0].message.content
 
 async def app():
     st.text("Created By: \n"
