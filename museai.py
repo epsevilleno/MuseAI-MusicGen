@@ -56,17 +56,18 @@ async def app():
             tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast', 'any'])
             activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
             music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
-        
-            context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
-            question = "What music should I play?"
             
-            if st.button("Generate Song List"):
-                if question and context:
-                    response = await generate_response(question, context)
-                    st.write("Songs Generated:")
-                    st.write(response)
-                else:
-                    st.error("Ensure all fields are filled out.")
+            if music_amount:
+                context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
+                question = "What music should I play?"
+                
+                if st.button("Generate Song List"):
+                    if question and context:
+                        response = await generate_response(question, context)
+                        st.write("Songs Generated:")
+                        st.write(response)
+                    else:
+                        st.error("Ensure all fields are filled out.")
 
 if __name__ == "__main__":
     import asyncio
