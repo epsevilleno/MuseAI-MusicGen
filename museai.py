@@ -35,37 +35,38 @@ async def app():
     """
     )
     
-    
     #User inputs to process
     feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")
     
-    genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
-    if genre_type == 'Other':
-        other_genre = st.text_input("Please specify what genre you would like.")
-        if other_genre:
-            genre_type = other_genre
-    
-    language_type = st.selectbox("What language do you prefer?", ['English', 'Filipino', 'Korean', 'Other'])
-    if language_type == 'Other':
-        other_language = st.text_input("Please specify what language you would like.")
-        if other_language:
-            language_type = other_language
-    
-    tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast'])
-    activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
-    music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
-    
-    context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
-    
-    question = "What music should I play?"
-    
-    if st.button("Generate Song List"):
-        if question and context:
-            response = await generate_response(question, context)
-            st.write("Songs Generated:")
-            st.write(response)
-        else:
-            st.error("Ensure all fields are filled out.")
+    if feeling_type:
+             
+        genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
+        if genre_type == 'Other':
+            other_genre = st.text_input("Please specify what genre you would like.")
+            if other_genre:
+                genre_type = other_genre
+        
+        language_type = st.selectbox("What language do you prefer?", ['English', 'Filipino', 'Korean', 'Other'])
+        if language_type == 'Other':
+            other_language = st.text_input("Please specify what language you would like.")
+            if other_language:
+                language_type = other_language
+        
+        tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast'])
+        activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
+        music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
+        
+        context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
+        
+        question = "What music should I play?"
+        
+        if st.button("Generate Song List"):
+            if question and context:
+                response = await generate_response(question, context)
+                st.write("Songs Generated:")
+                st.write(response)
+            else:
+                st.error("Ensure all fields are filled out.")
 
 if __name__ == "__main__":
     import asyncio
