@@ -49,7 +49,8 @@ async def app():
             if other_genre:
                 genre_type = other_genre
         
-        language_type = st.selectbox("What language do you prefer?")
+        language_type = st.text_input("What language do you prefer?")
+        
         if language_type:
         
             tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast', 'any'])
