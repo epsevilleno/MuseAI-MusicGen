@@ -18,6 +18,15 @@ async def generate_response(question, context):
     )
     return completion.choices[0].message.content
 
+async def museai_response (input):
+    model = "gpt-3.5-turbo"
+    response = openai.Completion.create(
+        model=model,
+        prompt=f"Please give a supportive respond based on {input}",
+        max_tokens = 50
+    )
+    return response.choices[0].message.content
+
 async def app():
     st.text("Created By: \n"
             "EJ Prince D. Sevilleno \n"
@@ -31,12 +40,15 @@ async def app():
     st.write(
     """
     Welcome to MuseAI! A music generator for every happening to your life.
-    This is an AI-powered generator for the final requirement in CCS229-Intelligent Systems.
+    This is an AI-powered generator powered by GPT 3.5 Turbo model for the final requirement in CCS229-Intelligent Systems.
     """
     )
-    
+
     #User inputs to process
-    feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")
+    feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")   
+    
+    museai = museai_response(feeling_type)
+    st.write(museai)
     
     if feeling_type:
              
@@ -52,12 +64,11 @@ async def app():
             if other_language:
                 language_type = other_language
         
-        tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast'])
+        tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast', 'any'])
         activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
         music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
         
         context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
-        
         question = "What music should I play?"
         
         if st.button("Generate Song List"):
