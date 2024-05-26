@@ -18,9 +18,6 @@ async def generate_response(question, context):
     )
     return completion.choices[0].message.content
 
-def run_async (coro):
-    return asyncio.run(coro)
-
 async def app():
     st.text("Created By: \n"
             "EJ Prince D. Sevilleno \n"
@@ -42,6 +39,11 @@ async def app():
     feeling_type = st.text_input("What do you feel right now? (e.g., feeling determined)")   
     
     if feeling_type:
+        museai_context = f'Provide a one-sentence supportive message based on {feeling_type} and say to proceed to next section.'
+        museai_question = "How should I respond to this?"
+        museai_response = await generate_response(museai_question, museai_context)
+        
+        st.write(museai_response)
                      
         genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
         if genre_type == 'Other':
