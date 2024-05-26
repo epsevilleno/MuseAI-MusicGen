@@ -54,12 +54,17 @@ async def app():
         language_type = st.text_input("What language do you prefer?")
         
         if language_type:
+            
+            st.write("Make your choices more tailored by proceeding to the next section.")
         
             tempo_type = st.selectbox("How fast would you like the song/s?", ['slow', 'moderate', 'fast', 'any'])
             activity_type = st.text_input("What are you doing right now? (e.g., studying or working-out )")   
             music_amount = st.text_input("How many songs would you like to generate? (e.g., 3 or three)") 
             
             if music_amount:
+                
+                st.write("Great! Now click the button below.")
+                
                 context = (f"Generate a music list with artists suggestion based on what I feel: {feeling_type}, genre: {genre_type}, language: {language_type}, speed: {tempo_type}, activity done: {activity_type} and generate {music_amount} song/s. ")
                 question = "What music should I play?"
                 
