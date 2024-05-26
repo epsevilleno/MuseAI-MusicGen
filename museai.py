@@ -50,7 +50,7 @@ async def app():
     
     if feeling_type:
         
-        museai = asyncio.run(museai_response(feeling_type))
+        museai = museai_response(feeling_type)
         st.write(museai)
                      
         genre_type = st.selectbox("What genre of music would you like to find?", ['Pop', 'Rock', 'Country', 'Classical', 'Jazz', 'Hip hop', 'Other'])
