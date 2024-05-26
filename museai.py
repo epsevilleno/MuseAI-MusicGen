@@ -31,7 +31,7 @@ async def museai_response(input_text):
 def run_async (coro):
     return asyncio.run(coro)
 
-async def app():
+def app():
     st.text("Created By: \n"
             "EJ Prince D. Sevilleno \n"
             "BSCS 3A-AI \n"
